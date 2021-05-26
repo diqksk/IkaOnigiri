@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ika-Onigiri</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        text-decoration: none;
+    }
+    .header_item{
+        height: 250px;
+        background: #cccccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #header_title{
+        font-size:30px;
+        font-weight: bold;
+    }
+    .menu{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #cccccc;
+    }
+    .link{
+        flex-grow: 1;
+        text-align: center;
+        padding:10px;
+    }
+    .menu_item{
+        width:100%;
+        font-weight: bold;
+    }
+    a:hover{
+        transition: all 0.5s;
+        cursor: pointer;
+        background: lightseagreen;
+    }
+    main{
+        padding:50px
+    }
+    .container{
+        border:1px solid #cccccc;
+        padding:40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 30vh;
+        background: #cccccc;
+    }
+    .login_window{
+        border-radius: 15px;
+        height: 90%;
+        width:40%;
+        background: white;
+        padding:20px;
+
+    }
+    .form{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .input_items{
+        width:80%
+    }
+    .sign_up{
+        background: lightseagreen;
+        text-align: center;
+    }
+    .input{
+        width: 90%;
+        font-size: 20px;
+        padding:5px 10px;
+    }
+
+</style>
+<body>
+<div th:replace="/storage/header"::header></div>
+<main>
+
+    <div class="container">
+        <div class="login_window">
+            <form action="/login" method="post" class="form">
+                <div class="input_items">
+                    <div>
+                        <input type="text" placeholder="아이디를 입력해주세요" class="input">
+                    </div>
+                    <div>
+                        <input type="password" placeholder="비밀번호를 입력해주세요" class="input">
+                    </div>
+                </div>
+                <div>
+                    <input type="button" value="Login">
+                </div>
+            </form>
+        <div class="sign_up">
+            sign up!
+        </div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+</body>
+</html>

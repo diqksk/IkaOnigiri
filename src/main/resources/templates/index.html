@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        text-decoration: none;
+    }
+    .header_item{
+        height: 250px;
+        background: #cccccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #header_title{
+        font-size:30px;
+        font-weight: bold;
+    }
+    .menu{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #cccccc;
+    }
+    .link{
+        flex-grow: 1;
+        text-align: center;
+        padding:10px;
+    }
+    .menu_item{
+        width:100%;
+        font-weight: bold;
+    }
+    a:hover{
+        transition: all 0.5s;
+        cursor: pointer;
+        background: lightseagreen;
+    }
+</style>
+<body>
+<div th:replace="/storage/header"::header></div>
+
+<main>
+
+</main>
+
+
+<footer>
+
+</footer>
+</body>
+</html>
