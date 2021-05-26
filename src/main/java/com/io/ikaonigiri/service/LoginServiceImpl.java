@@ -18,6 +18,10 @@ public class LoginServiceImpl implements LoginService {
     public Map<String, String> checkLogIn(String input_id) {
         return loginRepository.checkLogIn(input_id);
     }
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> af794a8 (signUp 구현)
 
     @Override
     public Map<String, String> checkSignUp(String input_text, String input_value) {
@@ -28,4 +32,9 @@ public class LoginServiceImpl implements LoginService {
     public int signUp(Map<String, String> input_value) {
         return loginRepository.signUp(input_value);
     }
+<<<<<<< HEAD
+=======
+>>>>>>> cf13451 (List/Login/LogOut 구현)
+=======
+>>>>>>> af794a8 (signUp 구현)
 }

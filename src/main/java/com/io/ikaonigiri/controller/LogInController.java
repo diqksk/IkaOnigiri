@@ -35,6 +35,10 @@ public class LogInController {
         }
     }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> af794a8 (signUp 구현)
     @PostMapping("/check-signup")
     public String checkSignUP(@RequestBody Map<String,String> signUpValues) {
         String id = signUpValues.get("id");
@@ -52,4 +56,9 @@ public class LogInController {
             return "ok";
         }
     }
+<<<<<<< HEAD
+=======
+>>>>>>> cf13451 (List/Login/LogOut 구현)
+=======
+>>>>>>> af794a8 (signUp 구현)
 }

@@ -8,6 +8,10 @@
         SELECT * FROM user where user_id=#{input_id}
     </select>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> af794a8 (signUp 구현)
     <select id="checkSignUp" parameterType="String" resultType="java.util.HashMap">
         SELECT * FROM user where ${input_text} = #{input_value}
     </select>
@@ -15,5 +19,10 @@
     <insert id="signUp" parameterType="java.util.HashMap">
         INSERT INTO user(user_id,password,nickname,email) VALUES(#{id},#{password},#{nickname},#{email})
     </insert>
+<<<<<<< HEAD
+=======
+>>>>>>> cf13451 (List/Login/LogOut 구현)
+=======
+>>>>>>> af794a8 (signUp 구현)
 
 </mapper>
