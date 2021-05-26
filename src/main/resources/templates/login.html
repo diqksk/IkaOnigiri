@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Ika-Onigiri</title>
 </head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style>
     *{
         margin:0;
@@ -82,10 +83,9 @@
 <body>
 <div th:replace="/storage/header"::header></div>
 <main>
-
     <div class="container">
         <div class="login_window">
-            <form action="/login" method="post" class="form">
+            <div class="form">
                 <div class="input_items">
                     <div>
                         <input type="text" placeholder="아이디를 입력해주세요" class="input">
@@ -95,9 +95,9 @@
                     </div>
                 </div>
                 <div>
-                    <input type="button" value="Login">
+                    <input type="button" value="Login" id="loginBtn">
                 </div>
-            </form>
+            </div>
         <div class="sign_up">
             sign up!
         </div>
@@ -107,5 +107,44 @@
 <footer>
 
 </footer>
+<script defer  th:inline="javascript">
+
+
+    if([[${session.id}]]){
+        location.href = '/';
+    }
+
+    const loginBtn = document.getElementById('loginBtn');
+    loginBtn.addEventListener('click', ()=>{
+        const input_value = document.querySelectorAll('.input');
+        if(input_value[0].value===""){
+            alert('id를 입력해주세요');
+        }else if(input_value[1].value===""){
+            alert('password를 입력해 주세요');
+        }else{
+            const json={id:input_value[0].value,password:input_value[1].value}
+
+            axios.post('/login', json)
+                .then((data) => {
+                    if (data.data === "login") {
+                        location.href = '/'
+
+                    }else if(data.data === "id"){
+                        alert(data.data);
+                        input_value[0].value='';
+                        input_value[1].value='';
+                        input_value[0].focus();
+                    }else{
+                        alert(data.data);
+                        input_value[1].value='';
+                        input_value[1].focus();
+                    }
+                })
+                .catch((err)=>{
+                    alert(err+' 입력정보를 확인해주세요');
+                })
+        }
+    });
+</script>
 </body>
 </html>

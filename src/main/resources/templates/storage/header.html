@@ -8,6 +8,7 @@
         <a href="/onigiriroom"  class="link"><span class="menu_item">오니기리의 방</span></a>
         <a href=""  class="link"><span class="menu_item">추억사진</span></a>
         <a href="" class="link"><span  class="menu_item">그림사진</span></a>
-        <a href="/login" class="link"><span  class="menu_item">Log in</span></a>
+        <a href="/login" class="link" th:if="${session.id==null}"><span  class="menu_item">Log in</span></a>
+        <a href="/logout" class="link" th:if="${session.id!=null}"><span  class="menu_item">Log out</span></a>
     </div>
 </header>
