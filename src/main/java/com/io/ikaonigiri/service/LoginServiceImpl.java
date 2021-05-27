@@ -18,4 +18,14 @@ public class LoginServiceImpl implements LoginService {
     public Map<String, String> checkLogIn(String input_id) {
         return loginRepository.checkLogIn(input_id);
     }
+
+    @Override
+    public Map<String, String> checkSignUp(String input_text, String input_value) {
+        return loginRepository.checkSignUp(input_text,input_value);
+    }
+
+    @Override
+    public int signUp(Map<String, String> input_value) {
+        return loginRepository.signUp(input_value);
+    }
 }

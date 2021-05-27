@@ -72,6 +72,13 @@
     .sign_up{
         background: lightseagreen;
         text-align: center;
+        margin-top:30px;
+        height: 30px;
+        line-height: 25px;
+        font-weight: bold;
+    }
+    .sign_up:hover{
+        cursor: pointer;
     }
     .input{
         width: 90%;
@@ -98,8 +105,8 @@
                     <input type="button" value="Login" id="loginBtn">
                 </div>
             </div>
-        <div class="sign_up">
-            sign up!
+        <div class="sign_up" id="sign_up">
+            sign up
         </div>
         </div>
     </div>
@@ -113,6 +120,11 @@
     if([[${session.id}]]){
         location.href = '/';
     }
+
+    const sign_up = document.getElementById('sign_up');
+    sign_up.addEventListener('click', () => {
+        location.href = '/signup';
+    });
 
     const loginBtn = document.getElementById('loginBtn');
     loginBtn.addEventListener('click', ()=>{

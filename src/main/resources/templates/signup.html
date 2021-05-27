@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ika-Onigiri</title>
+</head>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        text-decoration: none;
+    }
+    .header_item{
+        height: 250px;
+        background: #cccccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #header_title{
+        font-size:30px;
+        font-weight: bold;
+    }
+    .menu{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #cccccc;
+    }
+    .link{
+        flex-grow: 1;
+        text-align: center;
+        padding:10px;
+    }
+    .menu_item{
+        width:100%;
+        font-weight: bold;
+    }
+    a:hover{
+        transition: all 0.5s;
+        cursor: pointer;
+        background: lightseagreen;
+    }
+    main{
+        padding:50px;
+        background:#cccccc;
+    }
+    .container{
+        border:1px solid #cccccc;
+        padding:40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50vh;
+    }
+    .sign_box{
+        background: white;
+        box-shadow: 4px 3px 10px 0px rgba(50, 50, 50, 0.43);
+        height: 100%;
+        width: 35%;
+        max-width: 330px;
+        padding:30px;
+    }
+    .title{
+        text-align: center;
+        font-size:4vw;
+        font-weight:bold ;
+        margin-bottom:40px;
+    }
+    .input_items{
+        margin-top: 15px;
+        text-align: center;
+    }
+    .input_items input[type=text], .input_items input[type=password] {
+        width: 65%;
+        text-align: center;
+    }
+    .warning{
+        font-size: 1vw;
+        padding:10px;
+        color:red;
+    }
+</style>
+<body>
+<div th:replace="/storage/header"::header></div>
+<main>
+    <div class="container">
+        <div class="sign_box">
+            <div class="title">
+                <span>Sing up</span>
+            </div>
+            <div class="input_items">
+                <p><label for="id" class="label">id</label></p>
+                <input type="text" id="id" class="form_value">
+            </div>
+            <div class="input_items">
+                <p><label for="password" class="label">password</label></p>
+                <input type="password" id="password" class="form_value">
+            </div>
+            <div class="input_items">
+                <p><label for="nickname" class="label">nickname</label></p>
+                <input type="text" id="nickname" class="form_value">
+            </div>
+            <div class="input_items">
+                <p><label for="email" class="label">email</label></p>
+                <input type="text" id="email" class="form_value">
+            </div>
+            <div class="input_items">
+                <p style="margin-bottom: 25px"><span class="warning"></span></p>
+                <input type="button" value="회원가입" class="form_value">
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+<script defer  th:inline="javascript">
+    const form_value = document.querySelectorAll('.form_value');
+    const label = document.querySelectorAll('.label');
+
+    form_value[4].addEventListener('click', () => {
+        for(let i = 0; i<4 ; i++ ){
+            if(form_value[i].value===""){
+                alert(label[i].innerHTML + '값을 입력해 주세요');
+                form_value[i].focus();
+                return;
+            }
+        }
+        let json = {
+            id:form_value[0].value
+            ,password:form_value[1].value
+            ,nickname:form_value[2].value
+            ,email:form_value[3].value
+        }
+
+        axios.post('/check-signup', json)
+            .then((data) => {
+                const returnValue=data.data;
+                const warning = document.querySelector('.warning');
+                if(returnValue ==='ok'){
+                    alert('회원가입이 완료 되었습니다.');
+                    location.href = '/login';
+                }else{
+                    warning.innerHTML = returnValue+'값이 이미 존재합니다.'
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+    });
+</script>
+</body>
+</html>

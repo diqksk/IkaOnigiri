@@ -11,6 +11,10 @@ public class BoardController {
 
     private BoardService boardService;
 
+    @GetMapping("/signup")
+    public String signUp(){
+        return "signup";
+    }
 
 
 }

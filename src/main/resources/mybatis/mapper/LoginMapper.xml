@@ -8,5 +8,12 @@
         SELECT * FROM user where user_id=#{input_id}
     </select>
 
+    <select id="checkSignUp" parameterType="String" resultType="java.util.HashMap">
+        SELECT * FROM user where ${input_text} = #{input_value}
+    </select>
+
+    <insert id="signUp" parameterType="java.util.HashMap">
+        INSERT INTO user(user_id,password,nickname,email) VALUES(#{id},#{password},#{nickname},#{email})
+    </insert>
 
 </mapper>

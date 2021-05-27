@@ -35,4 +35,21 @@ public class LogInController {
         }
     }
 
+    @PostMapping("/check-signup")
+    public String checkSignUP(@RequestBody Map<String,String> signUpValues) {
+        String id = signUpValues.get("id");
+        String nickname = signUpValues.get("nickname");
+        String email = signUpValues.get("email");
+
+        if (loginService.checkSignUp("user_id",id) != null) {
+            return "id";
+        }else if (loginService.checkSignUp("nickname",nickname) != null) {
+            return "nickname";
+        }else if(loginService.checkSignUp("email",email) != null){
+            return "email";
+        }else{
+            loginService.signUp(signUpValues);
+            return "ok";
+        }
+    }
 }
