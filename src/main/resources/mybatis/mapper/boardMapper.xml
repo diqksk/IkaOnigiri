@@ -8,4 +8,11 @@
         SELECT * FROM board where board_no=#{board_no} ORDER BY id DESC
     </select>
 
+    <select id="callBoard" parameterType="int" resultType="java.util.HashMap">
+        SELECT * FROM board where id=#{id}
+    </select>
+
+    <insert id="insertBoard" parameterType="java.util.HashMap">
+        INSERT INTO board(title,writer,content,board_no) VALUES(#{title},#{writer},#{content},#{role})
+    </insert>
 </mapper>

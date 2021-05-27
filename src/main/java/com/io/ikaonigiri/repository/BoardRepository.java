@@ -8,7 +8,8 @@ import java.util.Map;
 @Mapper
 public interface BoardRepository {
     List<Map<String,String>> callBoards(int board_no);
-    Map<String,String> callBoard(int id,int board_no);
+    Map<String,String> callBoard(int id);
+    int insertBoard(Map<String,String> value);
     int deleteBoard(int id);
     int updateBoard(Map<String, String> value);
 }

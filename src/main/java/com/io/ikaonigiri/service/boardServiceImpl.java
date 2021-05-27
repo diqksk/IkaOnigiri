@@ -19,8 +19,8 @@ public class boardServiceImpl implements BoardService {
     }
 
     @Override
-    public Map<String, String> callBoard(int id, int board_no) {
-        return null;
+    public Map<String, String> callBoard(int id) {
+        return boardRepository.callBoard(id);
     }
 
     @Override
@@ -31,5 +31,10 @@ public class boardServiceImpl implements BoardService {
     @Override
     public int updateBoard(Map<String, String> value) {
         return 0;
+    }
+
+    @Override
+    public int insertBoard(Map<String, String> value) {
+        return boardRepository.insertBoard(value);
     }
 }

@@ -35,7 +35,13 @@
         width:100%;
         font-weight: bold;
     }
-    a:hover{
+    a:link{
+        color:black;
+    }
+    a:visited{
+        color:black;
+    }
+    .link:hover{
         transition: all 0.5s;
         cursor: pointer;
         background: lightseagreen;
@@ -111,7 +117,7 @@
                 <tbody class="tbody">
                     <tr class="row" th:each="list: ${lists}">
                         <td class="no" th:text="${list.id}"></td>
-                        <td class="title" th:text="${list.title}"></td>
+                        <td class="title" ><a th:href="@{/detail/{listId}(listId=${list.id})}" th:text="${list.title}"></a></td>
                         <td class="writer" th:text="${list.writer}"></td>
                         <td class="date" th:text="${#strings.substring(list.regdate,0,19)}"></td>
                     </tr>
@@ -119,7 +125,7 @@
             </table>
         </div>
         <div class="writeBtn">
-            <input type="button" value="글쓰기">
+            <input type="button" value="글쓰기" onclick="location.href = '/write'">
         </div>
     </div>
 </main>

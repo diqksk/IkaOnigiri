@@ -15,7 +15,7 @@ public class LoginServiceImpl implements LoginService {
     private LoginRepository loginRepository;
 
     @Override
-    public Map<String, String> checkLogIn(String input_id) {
+    public Map<String, Object> checkLogIn(String input_id) {
         return loginRepository.checkLogIn(input_id);
     }
 

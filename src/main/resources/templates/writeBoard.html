@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ika-Onigiri</title>
+    <!-- include libraries(jQuery, bootstrap) -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- include summernote css/js -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        text-decoration: none;
+    }
+    .header_item{
+        height: 250px;
+        background: #cccccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #header_title{
+        font-size:30px;
+        font-weight: bold;
+    }
+    .menu{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #cccccc;
+    }
+    .link{
+        flex-grow: 1;
+        text-align: center;
+        padding:10px;
+    }
+    .menu_item{
+        width:100%;
+        font-weight: bold;
+    }
+    a:hover{
+        transition: all 0.5s;
+        cursor: pointer;
+        background: lightseagreen;
+    }
+    main{
+        padding:50px
+    }
+    .container{
+        border:1px solid #cccccc;
+        padding:40px;
+    }
+    .title{
+        margin-bottom: 20px;
+        border-bottom: 1px solid #cccccc;
+        font-size: 30px;
+    }
+    textarea::placeholder{
+        color: #cccccc;
+    }
+
+</style>
+<body>
+<div th:replace="/storage/header"::header></div>
+<main>
+    <div class="container">
+        <form action="/write" method="POST" onsubmit="return formCheck();">
+            <div class="form_items">
+
+                <div class="title">
+                    <input type="text" id="title" name="title" style="border:none; width:100%;" placeholder="제목을 입력하세요.">
+                    <input type="hidden" name="writer" th:value="${session.id.nickname}">
+                    <input type="hidden" name="role" th:value="${session.id.role}">
+                </div>
+
+                <div class="textarea">
+                    <textarea name="content" id="summernote" cols="30" rows="10"></textarea>
+                </div>
+
+                <div>
+                    <input type="submit" class="submit" id="submit" value="제출">
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+<footer>
+
+</footer>
+<script>
+    $('#summernote').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true,                  // set focus to editable area after initializing summernote
+        callbacks : {
+            onImageUpload : function(files, editor, welEditable){
+                for (let i = files.length - 1 ; i >= 0; i--){
+                    uploadSummernoteImageFile(files[i], this);
+                }
+            }
+        }
+    });
+
+    function uploadSummernoteImageFile(file,el){
+        data = new FormData();
+        data.append('file', file);
+        $.ajax({
+            data : data,
+            type : 'POST',
+            url : '/uploadImage',
+            contentType : false,
+            enctype : 'multipart/form-data',
+            processData : false,
+            success : function(data){
+                $(el).summernote('editor.insertImage', data.url);
+            }
+        });
+    }
+
+    function formCheck(){
+        if(document.getElementById('title').value===""){
+            alert('제목을 입력해주세요.');
+            return false;
+        }else if (document.getElementById('summernote').value === ""){
+            alert('내용을 입력해해주세요');
+            return false;
+        }
+        return true;
+    }
+
+</script>
+</body>
+</html>
