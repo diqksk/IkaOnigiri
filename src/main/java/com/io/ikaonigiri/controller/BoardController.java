@@ -15,10 +15,5 @@ public class BoardController {
     public String signUp(){
         return "signup";
     }
-<<<<<<< HEAD
-
-=======
->>>>>>> af794a8 (signUp 구현)
-
 
 }

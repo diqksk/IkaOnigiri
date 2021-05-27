@@ -19,46 +19,37 @@ public class LogInController {
     private LoginService loginService;
 
     @PostMapping("/login")
-    public String checkLogIn(@RequestBody Map<String,String> login_values, HttpServletRequest request){
+    public String checkLogIn(@RequestBody Map<String, String> login_values, HttpServletRequest request) {
         String id = login_values.get("id");
         String password = login_values.get("password");
         System.out.println(loginService.checkLogIn(id));
 
-        if(loginService.checkLogIn(id)==null){
+        if (loginService.checkLogIn(id) == null) {
             return "id";
-        }else if(!loginService.checkLogIn(id).get("password").equals(password)){
+        } else if (!loginService.checkLogIn(id).get("password").equals(password)) {
             return "password";
-        }else{
+        } else {
             HttpSession session = request.getSession();
-            session.setAttribute("id",loginService.checkLogIn(id).get("nickname"));
+            session.setAttribute("id", loginService.checkLogIn(id).get("nickname"));
             return "login";
         }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> af794a8 (signUp 구현)
     @PostMapping("/check-signup")
-    public String checkSignUP(@RequestBody Map<String,String> signUpValues) {
+    public String checkSignUP(@RequestBody Map<String, String> signUpValues) {
         String id = signUpValues.get("id");
         String nickname = signUpValues.get("nickname");
         String email = signUpValues.get("email");
 
-        if (loginService.checkSignUp("user_id",id) != null) {
+        if (loginService.checkSignUp("user_id", id) != null) {
             return "id";
-        }else if (loginService.checkSignUp("nickname",nickname) != null) {
+        } else if (loginService.checkSignUp("nickname", nickname) != null) {
             return "nickname";
-        }else if(loginService.checkSignUp("email",email) != null){
+        } else if (loginService.checkSignUp("email", email) != null) {
             return "email";
-        }else{
+        } else {
             loginService.signUp(signUpValues);
             return "ok";
         }
     }
-<<<<<<< HEAD
-=======
->>>>>>> cf13451 (List/Login/LogOut 구현)
-=======
->>>>>>> af794a8 (signUp 구현)
 }
