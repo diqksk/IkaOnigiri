@@ -125,12 +125,33 @@
             </table>
         </div>
         <div class="writeBtn">
-            <input type="button" value="글쓰기" onclick="location.href = '/write'">
+            <input type="button" value="글쓰기" id="btn">
         </div>
     </div>
 </main>
 <footer>
 
 </footer>
+<script defer th:inline="javascript">
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click',()=>{
+        const user_inform = [[${session.id}]];
+
+        if(user_inform){
+            console.log(user_inform.role);
+            if(user_inform.role==='0'){
+                alert('글쓰기 권한이 없습니다.');
+            }else{
+                location.href = '/write';
+            };
+        }else {
+            alert('로그인을 해주세요.');
+            location.href = '/login';
+        }
+
+    })
+
+
+</script>
 </body>
 </html>
