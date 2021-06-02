@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ika-Onigiri</title>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        text-decoration: none;
+    }
+    .header_item{
+        height: 250px;
+        background: #cccccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #header_title{
+        font-size:30px;
+        font-weight: bold;
+    }
+    .menu{
+        display: flex;
+        justify-content: space-around;
+        border-bottom: 1px solid #cccccc;
+    }
+    .link{
+        flex-grow: 1;
+        text-align: center;
+        padding:10px;
+    }
+    .menu_item{
+        width:100%;
+        font-weight: bold;
+    }
+    a:link{
+        color:black;
+    }
+    a:visited{
+        color:black;
+    }
+    .link:hover{
+        transition: all 0.5s;
+        cursor: pointer;
+        background: lightseagreen;
+    }
+    main{
+        padding:50px
+    }
+    .container{
+        border:1px solid #cccccc;
+        padding:40px;
+    }
+    contents{
+        display: flex;
+        justify-content: center;
+    }
+    th{
+        border-bottom: 1px solid #cccccc;
+        border-top:1px solid rgba(97, 97, 97, 0.67);
+        height: 4vh;
+    }
+    table{
+        width:100%;
+        border-collapse: collapse;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(97, 97, 97, 0.67);
+    }
+    .no{
+        width:5vw;
+        text-align: center;
+    }
+    .writer{
+        width:10vw;
+        paddig-left:15px;
+    }
+    .date{
+        width:15vw;
+        text-align: center;
+    }
+    .tbody .title{
+        padding:3px 3px 3px 50px;
+    }
+    .row{
+        border-bottom: 1px solid #eaeaea;
+    }
+    .row:hover{
+        background: #cccccc;
+    }
+    .writeBtn{
+        text-align: right;
+        padding:20px;
+    }
+    .writeBtn input{
+        border: none;
+        background: #cccccc;
+        border-radius: 2px;
+        padding:2px;
+        color:white;
+    }
+</style>
+<body>
+<div th:replace="/storage/header"::header></div>
+<main>
+
+    <div class="container">
+        <div class="contents">
+            <table>
+                <thead>
+                    <th class="no">no</th>
+                    <th class="title">title</th>
+                    <th class="writer">writer</th>
+                    <th class="date">date</th>
+                </thead>
+                <tbody class="tbody">
+                    <tr class="row" th:each="list: ${lists}">
+                        <td class="no" th:text="${list.id}"></td>
+                        <td class="title" ><a th:href="@{/detail/{listId}(listId=${list.id})}" th:text="${list.title}"></a></td>
+                        <td class="writer" th:text="${list.writer}"></td>
+                        <td class="date" th:text="${#strings.substring(list.regdate,0,19)}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="writeBtn">
+            <input type="button" value="글쓰기" id="btn">
+        </div>
+    </div>
+</main>
+<footer>
+
+</footer>
+<script defer th:inline="javascript">
+    const btn = document.getElementById('btn');
+    btn.addEventListener('click',()=>{
+        const user_inform = [[${session.id}]];
+
+        if(user_inform){
+            console.log(user_inform.role);
+            if(user_inform.role==='0'){
+                alert('글쓰기 권한이 없습니다.');
+            }else{
+                location.href = '/write';
+            };
+        }else {
+            alert('로그인을 해주세요.');
+            location.href = '/login';
+        }
+
+    })
+
+
+</script>
+</body>
+</html>
